@@ -7,7 +7,7 @@ namespace LAB08_MauricioCalderón.Repositories;
 public class GRepository<T> : IGRepository<T>
     where T : class
 {
-    private readonly dbContextLINQ _context;
+    protected readonly dbContextLINQ _context;
     protected readonly DbSet<T> DbSet;
 
     public GRepository(dbContextLINQ context)

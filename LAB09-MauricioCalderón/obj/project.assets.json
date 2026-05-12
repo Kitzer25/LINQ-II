@@ -2532,11 +2532,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Programacion\\C#\\S9\\LINQ-II\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
+      "projectUniqueName": "K:\\Elementos\\Rider\\S9\\LINQ-II\\LINQ-II\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
       "projectName": "LAB09-MauricioCalderón",
-      "projectPath": "D:\\Programacion\\C#\\S9\\LINQ-II\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
+      "projectPath": "K:\\Elementos\\Rider\\S9\\LINQ-II\\LINQ-II\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
       "packagesPath": "C:\\Users\\Spart\\.nuget\\packages\\",
-      "outputPath": "D:\\Programacion\\C#\\S9\\LINQ-II\\LAB09-MauricioCalderón\\obj\\",
+      "outputPath": "K:\\Elementos\\Rider\\S9\\LINQ-II\\LINQ-II\\LAB09-MauricioCalderón\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Spart\\AppData\\Roaming\\NuGet\\NuGet.Config"

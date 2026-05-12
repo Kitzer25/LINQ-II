@@ -22,11 +22,11 @@ public class OrdenRepository :
             .ToListAsync(ct);
     }
     
-    public async Task<object?> GetMoreOrdersByClient(CancellationToken ct = default)
+    public async Task<OrdersByClientDTO?> GetMoreOrdersByClient(CancellationToken ct = default)
     {
         return await DbSet.AsNoTracking()
             .GroupBy(o => o.ClientId)
-            .Select(g => new 
+            .Select(g => new OrdersByClientDTO
             {
                 ClientId = g.Key,
                 TotalOrders = g.Count()
@@ -54,26 +54,23 @@ public class OrdenRepository :
             .ToListAsync(ct);
     }
 
-    public async Task<IEnumerable<SalesByClientDTO> GetSalesByCLient(CancellationToken ct = default)
+    public async Task<IEnumerable<SalesByClientDTO>> GetSalesByClient(
+        CancellationToken ct = default)
     {
-        var sales = await dbContextLINQ.Order
+        return await DbSet
             .AsNoTracking()
-            .Include(o => o.Client)
-            .Include(o => o.Orderdetails)
-            .ThenInclude(od => od.Product)
-            .GroupBy(o => new
-            {
-                o.ClientId,
-                o.Client.Name
+            .GroupBy(o => new 
+            { 
+                o.ClientId, 
+                o.Client.Name 
             })
-            .Select(group => new SalesByClientDTO
+            .Select(g => new SalesByClientDTO
             {
-                ClientName = group.Key.Name,
-                TotalSales = group
-                    .SelectMany(o => o.OrderDetails)
-                    .Sum(d => d.Quantity * d.Product.Price)
+                ClientName = g.Key.Name,
+                TotalSales = g.Sum(o => o.Orderdetails
+                    .Sum(od => od.Quantity * od.Product.Price))
             })
             .OrderByDescending(x => x.TotalSales)
-            .ToListAsync();
+            .ToListAsync(ct);
     }
 }

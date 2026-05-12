@@ -10,9 +10,11 @@ public class DetalleOrdenProfile : Profile
     public DetalleOrdenProfile()
     {
         CreateMap<Orderdetail, DetalleOrdenReadDTO>();
-
         CreateMap<DetalleOrdenCreateDTO, Orderdetail>();
-
         CreateMap<DetalleOrdenUpdateDTO, Orderdetail>();
+        CreateMap<Orderdetail, ProductQuantityReadDTO>()
+            .ForMember(dest => dest.Product,
+                opt => opt.MapFrom(src => src.Product.Name));
+
     }
 }
