@@ -112,15 +112,17 @@ public class OrdenService : IOrdenService
         return await _unitOfWork.OrdenRepo.GetMoreOrdersByClient(ct);
     }
 
-    public Task<List<string>> GetClientsByProduct(CancellationToken ct = default)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<List<string>> GetClientsByProduct(
         int clientId,
         CancellationToken ct = default)
     {
         return await _unitOfWork.OrdenRepo.GetClientsByProduct(clientId, ct);
+    }
+
+    public async Task<IEnumerable<ClientWithOrdersDTO>> GetClientsWithOrders(CancellationToken ct = default)
+    {
+        List <Order> orders = await _unitOfWork.OrdenRepo.GetClientWithOrders(ct);
+        
+        return _mapper.Map<List<ClientWithOrdersDTO>>(orders); 
     }
 }

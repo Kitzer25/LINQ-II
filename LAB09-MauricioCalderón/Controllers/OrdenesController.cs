@@ -84,13 +84,23 @@ public class OrdenesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("clients-products/{clientId:int}")]
+    [HttpGet("clients-products/{clientId}")]
     public async Task<IActionResult> GetClientsByProduct(
-        int clientId,
+        [FromRoute]int clientId,
         CancellationToken ct)
     {
         var result = await _service.GetClientsByProduct(clientId, ct);
 
         return Ok(result);
     }
+    
+    [HttpGet("clientswithorders")]
+    public async Task<IActionResult> GetClientsWithOrders(
+        CancellationToken ct)
+    {
+        var result = await _service.GetClientsWithOrders(ct);
+
+        return Ok(result);
+    }
+    
 }

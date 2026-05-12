@@ -1,3 +1,5 @@
+using System.Security.Principal;
+using LAB08_MauricioCalderón.DTO_s.Operations.Read;
 using LAB08_MauricioCalderón.Interfaces.IRepositories;
 using LAB08_MauricioCalderón.Models;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +26,7 @@ public class OrdenRepository :
     {
         return await DbSet.AsNoTracking()
             .GroupBy(o => o.ClientId)
-            .Select(g => new
+            .Select(g => new 
             {
                 ClientId = g.Key,
                 TotalOrders = g.Count()
@@ -41,5 +43,37 @@ public class OrdenRepository :
             .Select(od => od.Product.Name)
             .Distinct()
             .ToListAsync(ct);
+    }
+    
+    //Implementación Nueva
+    public async Task<List<Order>> GetClientWithOrders(CancellationToken ct = default)
+    {
+        return await DbSet.AsNoTracking()
+            .Include(o => o.Orderdetails)
+            .ThenInclude(od => od.Product)
+            .ToListAsync(ct);
+    }
+
+    public async Task<IEnumerable<SalesByClientDTO> GetSalesByCLient(CancellationToken ct = default)
+    {
+        var sales = await dbContextLINQ.Order
+            .AsNoTracking()
+            .Include(o => o.Client)
+            .Include(o => o.Orderdetails)
+            .ThenInclude(od => od.Product)
+            .GroupBy(o => new
+            {
+                o.ClientId,
+                o.Client.Name
+            })
+            .Select(group => new SalesByClientDTO
+            {
+                ClientName = group.Key.Name,
+                TotalSales = group
+                    .SelectMany(o => o.OrderDetails)
+                    .Sum(d => d.Quantity * d.Product.Price)
+            })
+            .OrderByDescending(x => x.TotalSales)
+            .ToListAsync();
     }
 }

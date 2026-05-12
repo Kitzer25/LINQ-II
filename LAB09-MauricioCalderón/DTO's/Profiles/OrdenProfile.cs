@@ -14,5 +14,8 @@ public class OrdenProfile : Profile
                 opt => opt.MapFrom(src => src.Orderdetails));
         CreateMap<OrdenCreateDTO, Order>();
         CreateMap<OrdenUpdateDTO, Order>();
+        CreateMap<Order, ClientWithOrdersDTO>()
+            .ForMember(dest => dest.Products,
+                opt => opt.MapFrom(src => src.Orderdetails.Select(d => d.Product)));
     }
 }

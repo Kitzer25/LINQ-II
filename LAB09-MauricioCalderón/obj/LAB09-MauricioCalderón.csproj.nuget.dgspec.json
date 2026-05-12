@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programacion\\C#\\S9\\C-_Template\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj": {}
+    "D:\\Programacion\\C#\\S9\\LINQ-II\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj": {}
   },
   "projects": {
-    "D:\\Programacion\\C#\\S9\\C-_Template\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj": {
+    "D:\\Programacion\\C#\\S9\\LINQ-II\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programacion\\C#\\S9\\C-_Template\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
+        "projectUniqueName": "D:\\Programacion\\C#\\S9\\LINQ-II\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
         "projectName": "LAB09-MauricioCalderón",
-        "projectPath": "D:\\Programacion\\C#\\S9\\C-_Template\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
+        "projectPath": "D:\\Programacion\\C#\\S9\\LINQ-II\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
         "packagesPath": "C:\\Users\\Spart\\.nuget\\packages\\",
-        "outputPath": "D:\\Programacion\\C#\\S9\\C-_Template\\LAB09-MauricioCalderón\\obj\\",
+        "outputPath": "D:\\Programacion\\C#\\S9\\LINQ-II\\LAB09-MauricioCalderón\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Spart\\AppData\\Roaming\\NuGet\\NuGet.Config"

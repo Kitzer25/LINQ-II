@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iAg1ToON0qQ=",
+  "dgSpecHash": "CYYKob6AhEM=",
   "success": true,
-  "projectFilePath": "D:\\Programacion\\C#\\S9\\C-_Template\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
+  "projectFilePath": "D:\\Programacion\\C#\\S9\\LINQ-II\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Spart\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\Spart\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -45,9 +45,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'AutoMapper' 14.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-rvv3-g6hj-g44x",
-      "projectPath": "D:\\Programacion\\C#\\S9\\C-_Template\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
+      "projectPath": "D:\\Programacion\\C#\\S9\\LINQ-II\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
       "warningLevel": 1,
-      "filePath": "D:\\Programacion\\C#\\S9\\C-_Template\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
+      "filePath": "D:\\Programacion\\C#\\S9\\LINQ-II\\LAB09-MauricioCalderón\\LAB09-MauricioCalderón.csproj",
       "libraryId": "AutoMapper",
       "targetGraphs": [
         "net10.0"

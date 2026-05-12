@@ -12,15 +12,11 @@ public class DetallesOrdenRepository :
     public DetallesOrdenRepository(dbContextLINQ dbContext) : base(dbContext)
     { }
 
-    public async Task<List<ProductQuantityReadDTO>> GetProductosDetails(int id, CancellationToken ct = default)
+    public async Task<List<Orderdetail>> GetProductosDetails(int id, CancellationToken ct = default)
     {
         return await DbSet.AsNoTracking()
             .Where(o => o.OrderId == id)
-            .Select(p => new ProductQuantityReadDTO
-            {
-                Product = p.Product.Name,
-                Quantity = p.Quantity
-            })
+            .Include(x => x.Product)
             .ToListAsync(ct);
     }
 
@@ -34,14 +30,10 @@ public class DetallesOrdenRepository :
         return quantity;
     }
 
-    public async Task<List<ProductQuantityReadDTO>> GetProductsAndQuantitys(CancellationToken ct = default)
+    public async Task<List<Orderdetail>> GetProductsAndQuantitys(CancellationToken ct = default)
     {
         return await DbSet.AsNoTracking()
-            .Select(o => new ProductQuantityReadDTO
-            {
-                Product = o.Product.Name,
-                Quantity = o.Quantity
-            })
+            .Include(x => x.Product)
             .ToListAsync(ct);
     }
 
@@ -53,4 +45,5 @@ public class DetallesOrdenRepository :
             .Distinct()
             .ToListAsync(ct);
     }
+    
 }
