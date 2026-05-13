@@ -100,4 +100,14 @@ public class ClienteService : IClienteService
 
         return _mapper.Map<IEnumerable<ClienteReadDTO>>(clients);
     }
+    
+    //Implementación
+    public async Task<IEnumerable<ClientTotalCountProductsReadDTO>> GetClientTotalCountProducts(
+        CancellationToken ct = default)
+    {
+        IEnumerable<ClientTotalCountProductsReadDTO> clients =
+            await _unitOfWork.ClienteRepo.GetClientWithProductCount(ct);
+
+        return clients;
+    }
 }

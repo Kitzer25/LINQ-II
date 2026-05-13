@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.JavaScript;
 using LAB08_MauricioCalderón.DTO_s.Operations.Create;
 using LAB08_MauricioCalderón.DTO_s.Operations.Read;
 using LAB08_MauricioCalderón.Interfaces.IServices;
@@ -26,7 +27,7 @@ public class OrdenesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id:int}")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id, CancellationToken ct)
     {
         var result = await _service.GetByIdAsync(id, ct);
@@ -52,20 +53,23 @@ public class OrdenesController : ControllerBase
     {
         var result = await _service.UpdateAsync(id, dto, ct);
 
-        return StatusCode(result.StatusCode, result);
+        return CreatedAtAction(
+            nameof(GetById),
+            new { id = result.Data },
+            result);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(
-        [FromBody] Order entity,
+        int id,
         CancellationToken ct)
     {
-        var result = await _service.DeleteAsync(entity, ct);
+        var result = await _service.DeleteAsync(id, ct);
 
         return StatusCode(result.StatusCode, result);
     }
 
-    [HttpGet("by-date")]
+    [HttpGet("date")]
     public async Task<IActionResult> GetOrderByDate(
         [FromQuery] string date,
         CancellationToken ct)
@@ -75,7 +79,7 @@ public class OrdenesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("more-orders-client")]
+    [HttpGet("clients/moreorders")]
     public async Task<IActionResult> GetMoreOrdersByClient(
         CancellationToken ct)
     {
@@ -84,7 +88,7 @@ public class OrdenesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("clients-products/{clientId}")]
+    [HttpGet("clients/products/{clientId}")]
     public async Task<IActionResult> GetClientsByProduct(
         [FromRoute]int clientId,
         CancellationToken ct)
@@ -93,8 +97,8 @@ public class OrdenesController : ControllerBase
 
         return Ok(result);
     }
-    
-    [HttpGet("clientswithorders")]
+
+    [HttpGet("client/orders")]
     public async Task<IActionResult> GetClientsWithOrders(
         CancellationToken ct)
     {
@@ -103,4 +107,12 @@ public class OrdenesController : ControllerBase
         return Ok(result);
     }
     
+    [HttpGet("sales")]
+    public async Task<IActionResult> GetSalesByClient(
+        CancellationToken ct)
+    {
+        var result = await _service.GetSalesByClient(ct);
+
+        return Ok(result);
+    }
 }

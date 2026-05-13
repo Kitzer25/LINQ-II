@@ -26,8 +26,9 @@ public class DetallesOrdenController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetById(int id, CancellationToken ct)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(
+        [FromRoute] int id, CancellationToken ct)
     {
         var result = await _service.GetByIdAsync(id, ct);
 
@@ -41,7 +42,10 @@ public class DetallesOrdenController : ControllerBase
     {
         var result = await _service.AddAsync(dto, ct);
 
-        return StatusCode(result.StatusCode, result);
+        return CreatedAtAction(
+            nameof(GetById),
+            new { id = result.Data },
+            result);
     }
 
     [HttpPut("{id}")]
@@ -55,12 +59,12 @@ public class DetallesOrdenController : ControllerBase
         return StatusCode(result.StatusCode, result);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(
-        [FromBody] Orderdetail entity,
+        int id,
         CancellationToken ct)
     {
-        var result = await _service.DeleteAsync(entity, ct);
+        var result = await _service.DeleteAsync(id, ct);
 
         return StatusCode(result.StatusCode, result);
     }
@@ -85,7 +89,7 @@ public class DetallesOrdenController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("products-quantities")]
+    [HttpGet("products/quantities")]
     public async Task<IActionResult> GetProductsAndQuantitys(
         CancellationToken ct)
     {
@@ -94,7 +98,7 @@ public class DetallesOrdenController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id:int}/clients-products")]
+    [HttpGet("{id:int}/products/clients")]
     public async Task<IActionResult> GetClientsByProducts(
         int id,
         CancellationToken ct)

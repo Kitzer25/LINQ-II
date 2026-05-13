@@ -12,4 +12,5 @@ public interface IClienteService :
         ClienteUpdateDTO>
 {
     Task<IEnumerable<ClienteReadDTO>> GetClientsByName(string nombre, CancellationToken ct = default);
+    Task<IEnumerable<ClientTotalCountProductsReadDTO>> GetClientTotalCountProducts(CancellationToken ct = default);
 }

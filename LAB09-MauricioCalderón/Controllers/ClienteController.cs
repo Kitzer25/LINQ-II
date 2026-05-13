@@ -1,7 +1,6 @@
 using LAB08_MauricioCalderón.DTO_s.Operations.Create;
 using LAB08_MauricioCalderón.DTO_s.Operations.Read;
 using LAB08_MauricioCalderón.Interfaces.IServices;
-using LAB08_MauricioCalderón.Models;
 
 namespace LAB08_MauricioCalderón.Controllers;
 
@@ -26,8 +25,10 @@ public class ClientesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetById(int id, CancellationToken ct)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(
+        [FromRoute] int id,
+        CancellationToken ct)
     {
         var result = await _service.GetByIdAsync(id, ct);
 
@@ -41,12 +42,15 @@ public class ClientesController : ControllerBase
     {
         var result = await _service.AddAsync(dto, ct);
 
-        return StatusCode(result.StatusCode, result);
+        return CreatedAtAction(
+            nameof(GetById),
+            new { id = result.Data },
+            result);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(
-        int id,
+        [FromRoute] int id,
         [FromBody] ClienteUpdateDTO dto,
         CancellationToken ct)
     {
@@ -55,22 +59,31 @@ public class ClientesController : ControllerBase
         return StatusCode(result.StatusCode, result);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(
-        [FromBody] Client entity,
+        [FromRoute] int id,
         CancellationToken ct)
     {
-        var result = await _service.DeleteAsync(entity, ct);
+        var result = await _service.DeleteAsync(id, ct);
 
         return StatusCode(result.StatusCode, result);
     }
 
-    [HttpGet("by-name")]
+    [HttpGet("client/{name}")]
     public async Task<IActionResult> GetClientsByName(
-        [FromQuery] string nombre,
+        [FromQuery] string name,
         CancellationToken ct)
     {
-        var result = await _service.GetClientsByName(nombre, ct);
+        var result = await _service.GetClientsByName(name, ct);
+
+        return Ok(result);
+    }
+    
+    [HttpGet("products/totalcount")]
+    public async Task<IActionResult> GetClientsByName(
+        CancellationToken ct)
+    {
+        var result = await _service.GetClientTotalCountProducts(ct);
 
         return Ok(result);
     }

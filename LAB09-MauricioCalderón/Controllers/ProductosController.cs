@@ -41,7 +41,10 @@ public class ProductosController : ControllerBase
     {
         var result = await _service.AddAsync(dto, ct);
 
-        return StatusCode(result.StatusCode, result);
+        return CreatedAtAction(
+            nameof(GetById),
+            new { id = result.Data },
+            result);
     }
 
     [HttpPut("{id}")]
@@ -55,12 +58,12 @@ public class ProductosController : ControllerBase
         return StatusCode(result.StatusCode, result);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(
-        [FromBody] Product entity,
+        int id,
         CancellationToken ct)
     {
-        var result = await _service.DeleteAsync(entity, ct);
+        var result = await _service.DeleteAsync(id, ct);
 
         return StatusCode(result.StatusCode, result);
     }

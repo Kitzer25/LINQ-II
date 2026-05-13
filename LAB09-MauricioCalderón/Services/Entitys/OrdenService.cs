@@ -106,12 +106,13 @@ public class OrdenService : IOrdenService
         return _mapper.Map<IEnumerable<OrdenReadDTO>>(orders);
     }
 
-    public async Task<object?> GetMoreOrdersByClient(
+    public async Task<OrdersByClientDTO?> GetMoreOrdersByClient(
         CancellationToken ct = default)
     {
         return await _unitOfWork.OrdenRepo.GetMoreOrdersByClient(ct);
     }
-
+    
+    //Implementación
     public async Task<List<string>> GetClientsByProduct(
         int clientId,
         CancellationToken ct = default)
@@ -124,5 +125,12 @@ public class OrdenService : IOrdenService
         List <Order> orders = await _unitOfWork.OrdenRepo.GetClientWithOrders(ct);
         
         return _mapper.Map<List<ClientWithOrdersDTO>>(orders); 
+    }
+
+    public async Task<IEnumerable<SalesByClientDTO>> GetSalesByClient(CancellationToken ct = default)
+    {
+        IEnumerable<SalesByClientDTO> sales = await _unitOfWork.OrdenRepo.GetSalesByClient();
+
+        return sales;
     }
 }
