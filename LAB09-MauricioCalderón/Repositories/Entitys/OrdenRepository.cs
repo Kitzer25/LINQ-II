@@ -46,7 +46,26 @@ public class OrdenRepository :
     }
     
     //Implementación Nueva
-    public async Task<IEnumerable<ClientOrderReadDTO>> GetClientOrderList(CancellationToken ct = default)
+    public async Task<IEnumerable<DetallesOrdenIncludeReadDTO>> GetOrdersAndProducts(CancellationToken ct = default)
+    {
+        return await DbSet.AsNoTracking()
+            .Include(od => od.Orderdetails)
+            .ThenInclude(od => od.Product)
+            .Select(o => new DetallesOrdenIncludeReadDTO
+            {
+                OrderId = o.OrderId,
+                OrderDate = o.OrderDate,
+                Products = o.Orderdetails.Select(od => new DetallesOrdenProductoReadDTO
+                {
+                    ProductName = od.Product.Name,
+                    Price = od.Product.Price,
+                    Quantity = od.Quantity
+                }).ToList()
+            }).ToListAsync(ct);
+    }
+
+    public async Task<IEnumerable<ClientOrderReadDTO>> GetClientOrderList(
+        CancellationToken ct = default)
     {
         return await _context.Clients.AsNoTracking()
             .Select(c => new ClientOrderReadDTO

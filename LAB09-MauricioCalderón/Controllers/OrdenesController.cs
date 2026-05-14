@@ -82,7 +82,7 @@ public class OrdenesController : ControllerBase
     [HttpGet("clients/list")]
     public async Task<IActionResult> GetClientOrderList(CancellationToken ct)
     {
-        var result = _service.GetClientList();
+        var result = await _service.GetClientList();
         
         return Ok(new 
             { 
@@ -126,6 +126,13 @@ public class OrdenesController : ControllerBase
     {
         var result = await _service.GetSalesByClient(ct);
 
+        return Ok(result);
+    }
+
+    [HttpGet("products")]
+    public async Task<IActionResult> GetProductsByClient(CancellationToken ct)
+    {
+        var result = await _service.GetOrdersAndProducts(ct);
         return Ok(result);
     }
 }

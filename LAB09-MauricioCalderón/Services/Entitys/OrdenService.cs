@@ -138,6 +138,11 @@ public class OrdenService : IOrdenService
 
         return sales;
     }
-    
-    
+
+    public async Task<IEnumerable<DetallesOrdenIncludeReadDTO>> GetOrdersAndProducts(CancellationToken ct = default)
+    {
+        IEnumerable<DetallesOrdenIncludeReadDTO> data =  await _unitOfWork.OrdenRepo.GetOrdersAndProducts(ct);
+
+        return data;
+    }
 }

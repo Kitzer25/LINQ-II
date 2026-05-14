@@ -26,7 +26,8 @@ public class ClienteRepository :
     }
 
     //Implementación
-    public async Task<IEnumerable<ClientTotalCountProductsReadDTO>> GetClientWithProductCount(CancellationToken ct = default)
+    public async Task<IEnumerable<ClientTotalCountProductsReadDTO>> GetClientWithProductCount(
+        CancellationToken ct = default)
     {
         return await DbSet.AsNoTracking()
             .Select(c => new ClientTotalCountProductsReadDTO
