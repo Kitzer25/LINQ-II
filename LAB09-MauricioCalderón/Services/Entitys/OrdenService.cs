@@ -120,6 +120,11 @@ public class OrdenService : IOrdenService
         return await _unitOfWork.OrdenRepo.GetClientsByProduct(clientId, ct);
     }
 
+    public async Task<IEnumerable<ClientOrderReadDTO>> GetClientList(CancellationToken ct = default)
+    {
+        return await _unitOfWork.OrdenRepo.GetClientOrderList(ct);
+    }
+
     public async Task<IEnumerable<ClientWithOrdersDTO>> GetClientsWithOrders(CancellationToken ct = default)
     {
         List <Order> orders = await _unitOfWork.OrdenRepo.GetClientWithOrders(ct);
@@ -133,4 +138,6 @@ public class OrdenService : IOrdenService
 
         return sales;
     }
+    
+    
 }

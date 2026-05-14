@@ -79,6 +79,19 @@ public class OrdenesController : ControllerBase
         return Ok(result);
     }
 
+    [HttpGet("clients/list")]
+    public async Task<IActionResult> GetClientOrderList(CancellationToken ct)
+    {
+        var result = _service.GetClientList();
+        
+        return Ok(new 
+            { 
+            Message = "Información recopilada",
+            Data = result
+            }
+        );
+    }
+
     [HttpGet("clients/moreorders")]
     public async Task<IActionResult> GetMoreOrdersByClient(
         CancellationToken ct)
